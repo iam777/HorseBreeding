@@ -1,5 +1,7 @@
 package com.ryanmichela.horsebreeding.genetics;
 
+import com.ryanmichela.horsebreeding.Randomable;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -7,25 +9,24 @@ import java.util.Random;
 /**
  * Copyright 2014 Ryan Michela
  */
-public class Cromatid {
+class Cromatid {
     private Chromosome c1;
     private Chromosome c2;
 
-    public Cromatid(Chromosome c) {
+    Cromatid(Chromosome c) {
         this.c1 = c;
         this.c2 = c;
     }
 
-    public Chromosome getC1() {
+    Chromosome getC1() {
         return c1;
     }
 
-    public Chromosome getC2() {
+    Chromosome getC2() {
         return c2;
     }
 
-    public static void crossover(Cromatid p1, Cromatid p2) {
-        Random rnd = new Random();
+    static void crossover(Cromatid p1, Cromatid p2, Randomable rnd) {
         int crossoverPoint = rnd.nextInt(Chromosome.NUMBER_OF_GENES);
 
         List<Boolean> a = new ArrayList<Boolean>(Chromosome.NUMBER_OF_GENES);
@@ -40,7 +41,12 @@ public class Cromatid {
             }
         }
 
-        p1.c2 = new Chromosome(a);
-        p2.c1 = new Chromosome(b);
+        p1.c2 = new Chromosome(a, rnd);
+        p2.c1 = new Chromosome(b, rnd);
+    }
+
+    @Override
+    public String toString() {
+        return c1.toString() + " : " + c2.toString();
     }
 }
