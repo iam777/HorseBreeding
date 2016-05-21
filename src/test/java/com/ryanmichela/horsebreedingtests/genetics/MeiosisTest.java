@@ -1,9 +1,10 @@
-package genetics;
+package com.ryanmichela.horsebreedingtests.genetics;
 
 import com.ryanmichela.horsebreeding.Randomable;
 import com.ryanmichela.horsebreeding.genetics.Chromosome;
 import com.ryanmichela.horsebreeding.genetics.Gamete;
 import com.ryanmichela.horsebreeding.genetics.Zygote;
+import com.ryanmichela.horsebreedingtests.MockRandom;
 import org.junit.Test;
 
 import java.util.List;

@@ -10,9 +10,8 @@ public class RealRandom implements Randomable, Serializable {
     private static final long serialVersionUID = 8550217448673135744L;
     private Random rnd;
 
-
-    public RealRandom(Random rnd) {
-        this.rnd = rnd;
+    public RealRandom(long seed) {
+        this.rnd = new Random(seed);
     }
 
     public int nextInt(int bound) {

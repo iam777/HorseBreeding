@@ -11,7 +11,7 @@ import java.util.*;
 public class Chromosome implements Serializable {
     private static final long serialVersionUID = 1554587864477651876L;
     public static int NUMBER_OF_GENES = 24;
-    public static int MUTATION_PROBABILITY = 2;
+    public static int MUTATION_PROBABILITY = 5;
 
     private final List<Boolean> geneSequence;
     private final Randomable rnd;
@@ -26,7 +26,7 @@ public class Chromosome implements Serializable {
     }
 
     public void mutate() {
-        if (rnd.nextInt(100) <= MUTATION_PROBABILITY) {
+        if (rnd.nextInt(1000) <= MUTATION_PROBABILITY) {
             int i = rnd.nextInt(NUMBER_OF_GENES);
             geneSequence.set(i, rnd.nextBoolean());
         }

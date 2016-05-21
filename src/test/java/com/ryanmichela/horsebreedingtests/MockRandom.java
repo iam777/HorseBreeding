@@ -1,4 +1,4 @@
-package genetics;
+package com.ryanmichela.horsebreedingtests;
 
 import com.ryanmichela.horsebreeding.Randomable;
 

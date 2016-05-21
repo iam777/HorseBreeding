@@ -39,6 +39,12 @@ public class Gamete implements Serializable {
         return new Zygote(p1, p2);
     }
 
+    public void mutate() {
+        getA().mutate();
+        getB().mutate();
+        getC().mutate();
+    }
+
     @Override
     public String toString() {
         return a.toString() + " / " + b.toString() + " / " + c.toString();

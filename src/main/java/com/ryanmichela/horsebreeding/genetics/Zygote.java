@@ -56,6 +56,12 @@ public class Zygote {
         return gametes;
     }
 
+    public Zygote mutate() {
+        p1.mutate();
+        p2.mutate();
+        return this;
+    }
+
     @Override
     public String toString() {
         return p1.toString() + " :: " + p2.toString();
