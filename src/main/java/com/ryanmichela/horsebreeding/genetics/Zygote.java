@@ -2,6 +2,7 @@ package com.ryanmichela.horsebreeding.genetics;
 
 import com.ryanmichela.horsebreeding.Randomable;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -9,9 +10,11 @@ import java.util.Random;
 /**
  * Copyright 2014 Ryan Michela
  */
-public class Zygote {
+public class Zygote implements Serializable {
+    private static final long serialVersionUID = -6837983940339034511L;
     private final Gamete p1;
     private final Gamete p2;
+
 
     public Zygote(Gamete p1, Gamete p2) {
         this.p1 = p1;

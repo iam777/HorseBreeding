@@ -1,43 +1,57 @@
 package com.ryanmichela.horsebreeding;
 
+import com.ryanmichela.horsebreeding.geneticStore.GeneticStore;
+import com.ryanmichela.horsebreeding.genetics.Zygote;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.mapdb.DB;
+import org.mapdb.DBMaker;
+import org.mapdb.Serializer;
+
+import java.io.File;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * Copyright 2014 Ryan Michela
  */
 public class HorsePlugin extends JavaPlugin {
 
-    private static HorsePlugin instance;
-
+    private DB geneticDB;
     private GeneticStore geneticStore;
-
-    public static HorsePlugin getInstance() {
-        if (instance == null) {
-            throw new IllegalStateException("HorsePlugin not enabled");
-        }
-        return instance;
-    }
 
     @Override
     public void onLoad() {
         saveDefaultConfig();
-        getServer().getPluginManager().registerEvents(new HorseEventHandler(), this);
-        geneticStore = new GeneticStore();
     }
 
     @Override
     public void onEnable() {
-        instance = this;
+        getServer().getPluginManager().registerEvents(new ChunkEventHandler(this), this);
+        getServer().getPluginManager().registerEvents(new HorseEventHandler(this), this);
+        getServer().getPluginManager().registerEvents(new PlayerEventHandler(), this);
+
+        geneticStore = new GeneticStore(loadGeneticDb());
     }
 
     @Override
     public void onDisable() {
-        instance = null;
         HandlerList.unregisterAll(this);
+        geneticDB.close();
     }
 
     public GeneticStore getGeneticStore() {
         return geneticStore;
+    }
+
+    @SuppressWarnings("unchecked")
+    private Map<UUID, Zygote> loadGeneticDb() {
+        geneticDB = DBMaker.fileDB(new File(getDataFolder(), "genetics.db")).make();
+        Map<UUID, Zygote> map = geneticDB.treeMap("genes")
+                                         .keySerializer(Serializer.UUID)
+                                         .valueSerializer(Serializer.JAVA)
+                                         .createOrOpen();
+        getLogger().info("Tracking " + map.size() + " horse genotypes");
+        return map;
     }
 }

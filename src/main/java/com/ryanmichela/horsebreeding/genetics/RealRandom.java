@@ -1,4 +1,6 @@
-package com.ryanmichela.horsebreeding;
+package com.ryanmichela.horsebreeding.genetics;
+
+import com.ryanmichela.horsebreeding.Randomable;
 
 import java.io.Serializable;
 import java.util.Random;

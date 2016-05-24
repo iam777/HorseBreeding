@@ -3,3 +3,4 @@ version: "1.0"
 author: Ryan Michela
 main: com.ryanmichela.horsebreeding.HorsePlugin
 description: Genetic horse breeding.
+load: STARTUP
